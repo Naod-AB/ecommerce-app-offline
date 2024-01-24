@@ -27,11 +27,13 @@ Future<bool?> showAlertDialog({
           ? <Widget>[
               if (cancelActionText != null)
                 TextButton(
-                    child: Text(cancelActionText),
-                    onPressed: () => context.pop(false)),
+                  child: Text(cancelActionText),
+                  onPressed: () => context.pop(false),
+                ),
               TextButton(
-                  child: Text(defaultActionText),
-                  onPressed: () => context.pop(true)),
+                child: Text(defaultActionText),
+                onPressed: () => context.pop(true),
+              ),
             ]
           : <Widget>[
               if (cancelActionText != null)
