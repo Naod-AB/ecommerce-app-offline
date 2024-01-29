@@ -8,7 +8,7 @@ class FakeProductsRepository {
 
   final List<Product> _products = kTestProducts;
 
-  List<Product> getProductList() {
+  List<Product> getProductsList() {
     return _products;
   }
 
@@ -24,8 +24,8 @@ class FakeProductsRepository {
     return Stream.value(_products);
   }
 
-  Stream<Product> watchProduct(String id) {
-    return Stream.value(_products).map((productList) =>
-        productList.firstWhere((products) => products.id == id));
+  Stream<Product?> watchProduct(String id) {
+    return watchProductsList()
+        .map((products) => products.firstWhere((product) => product.id == id));
   }
 }
