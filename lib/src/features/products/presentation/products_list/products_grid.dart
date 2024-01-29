@@ -16,7 +16,7 @@ class ProductsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Read from data source
-    final products = FakeProductsRepository.instance.getProductList();
+    final products = FakeProductsRepository.instance.getProductsList();
     return products.isEmpty
         ? Center(
             child: Text(
