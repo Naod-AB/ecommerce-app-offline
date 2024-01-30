@@ -17,7 +17,7 @@ class ProductsGrid extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productsListValue = ref.watch(productsListFutureProvider);
+    final productsListValue = ref.watch(productsListStreamProvider);
     return productsListValue.when(
         data: (products) => products.isEmpty
             ? Center(
@@ -39,8 +39,8 @@ class ProductsGrid extends ConsumerWidget {
                   );
                 },
               ),
-        error: (e, st) => ErrorMessageWidget(e.toString()),
-        loading: () => const CircularProgressIndicator());
+        error: (e, st) => Center(child: ErrorMessageWidget(e.toString())),
+        loading: () => const Center(child: CircularProgressIndicator()));
   }
 }
 
