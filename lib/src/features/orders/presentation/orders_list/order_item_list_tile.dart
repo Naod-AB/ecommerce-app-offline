@@ -12,9 +12,9 @@ class OrderItemListTile extends ConsumerWidget {
   final Item item;
 
   @override
-  Widget build(BuildContext context, ref) {
-    final productProvider = ref.watch(productsRepositoryProvider);
-    final product = productProvider.getProduct(item.productId)!;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsRepository = ref.watch(productsRepositoryProvider);
+    final product = productsRepository.getProduct(item.productId)!;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
       child: Row(

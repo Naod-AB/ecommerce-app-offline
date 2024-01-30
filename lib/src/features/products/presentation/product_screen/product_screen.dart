@@ -24,23 +24,25 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const HomeAppBar(),
-      body: Consumer(builder: (context, ref, _) {
-        final productProvider = ref.watch(productsRepositoryProvider);
-        final product = productProvider.getProduct(productId);
-        return product == null
-            ? EmptyPlaceholderWidget(
-                message: 'Product not found'.hardcoded,
-              )
-            : CustomScrollView(
-                slivers: [
-                  ResponsiveSliverCenter(
-                    padding: const EdgeInsets.all(Sizes.p16),
-                    child: ProductDetails(product: product),
-                  ),
-                  ProductReviewsList(productId: productId),
-                ],
-              );
-      }),
+      body: Consumer(
+        builder: (context, ref, _) {
+          final productsRepository = ref.watch(productsRepositoryProvider);
+          final product = productsRepository.getProduct(productId);
+          return product == null
+              ? EmptyPlaceholderWidget(
+                  message: 'Product not found'.hardcoded,
+                )
+              : CustomScrollView(
+                  slivers: [
+                    ResponsiveSliverCenter(
+                      padding: const EdgeInsets.all(Sizes.p16),
+                      child: ProductDetails(product: product),
+                    ),
+                    ProductReviewsList(productId: productId),
+                  ],
+                );
+        },
+      ),
     );
   }
 }

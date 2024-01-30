@@ -15,9 +15,9 @@ class ProductsGrid extends ConsumerWidget {
   const ProductsGrid({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
-    final productProvider = ref.watch(productsRepositoryProvider);
-    final products = productProvider.getProductsList();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsRepository = ref.watch(productsRepositoryProvider);
+    final products = productsRepository.getProductsList();
     return products.isEmpty
         ? Center(
             child: Text(
