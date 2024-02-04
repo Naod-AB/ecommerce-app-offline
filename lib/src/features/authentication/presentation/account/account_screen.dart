@@ -2,6 +2,7 @@ import 'package:ecommerce_app/src/common_widgets/alert_dialogs.dart';
 import 'package:ecommerce_app/src/features/authentication/presentation/account/account_screen_controller.dart';
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
+import 'package:ecommerce_app/src/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/src/common_widgets/action_text_button.dart';
 import 'package:ecommerce_app/src/common_widgets/responsive_center.dart';
@@ -16,13 +17,8 @@ class AccountScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final state = ref.watch(accountScreenControllerProvider);
-    ref.listen<AsyncValue<void>>(accountScreenControllerProvider,
-        (previousState, state) {
-      if (!state.isLoading && state.hasError) {
-        showExceptionAlertDialog(
-            context: context, title: 'Error'.hardcoded, exception: state.error);
-      }
-    });
+    ref.listen<AsyncValue>(accountScreenControllerProvider,
+        (_, state) => state.showAlertDialogOnError(context));
     return Scaffold(
       appBar: AppBar(
         title: Text('Account'.hardcoded),
