@@ -8,7 +8,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final goRouter = ref.watch(GoRouterProvider);
+    final goRouter = ref.watch(goRouterProvider);
     return MaterialApp.router(
       routerConfig: goRouter,
       debugShowCheckedModeBanner: false,
