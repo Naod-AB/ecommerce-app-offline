@@ -3,8 +3,16 @@ import 'package:ecommerce_app/src/features/products/data/fake_products_repositor
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  final productsRepository = FakeProductsRepository();
   test('getProductsList returns global list', () {
-    final repository = FakeProductsRepository();
-    expect(repository.getProductsList(), kTestProducts);
+    expect(productsRepository.getProductsList(), kTestProducts);
+  });
+
+  test('getProduct(1) returns first item', () {
+    expect(productsRepository.getProduct('1'), kTestProducts[0]);
+  });
+
+  test('getProduct(100) returns null', () {
+    expect(() => productsRepository.getProduct('100'), throwsStateError);
   });
 }
