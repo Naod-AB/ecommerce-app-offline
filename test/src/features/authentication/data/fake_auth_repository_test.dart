@@ -13,6 +13,6 @@ void main() {
   });
 
   test('getProduct(100) returns null', () {
-    expect(() => productsRepository.getProduct('100'), throwsStateError);
+    expect(productsRepository.getProduct('100'), null);
   });
 }
