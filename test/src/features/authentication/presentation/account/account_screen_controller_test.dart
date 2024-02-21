@@ -32,5 +32,21 @@ void main() {
       verify(authRepository.signOut).called(1);
       expect(controller.state, const AsyncData<void>(null));
     });
+    test('signOut failure', () async {
+      // setup
+      final authRepository = MockAuthRepository();
+      final exception = Exception('Connection failed');
+      when(authRepository.signOut).thenThrow(exception);
+      final controller = AccountScreenController(
+        authRepository: authRepository,
+      );
+      // run
+      await controller.signOut();
+      // verify
+      verify(authRepository.signOut).called(1);
+      expect(controller.state.hasError, true);
+      // you can also use this instead
+      expect(controller.state, isA<AsyncError>());
+    });
   });
 }
