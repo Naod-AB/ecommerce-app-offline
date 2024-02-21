@@ -18,5 +18,14 @@ void main() {
       expect(authRepository.currentUser, null);
       expect(authRepository.authStateChanges(), emits(null));
     });
+    test('currentUser is not null after sign in', () async {
+      final authRepository = makeAuthRepository();
+      await authRepository.signInWithEmailAndPassword(
+        testEmail,
+        testPassword,
+      );
+      expect(authRepository.currentUser, testUser);
+      expect(authRepository.authStateChanges(), emits(testUser));
+    });
   });
 }
