@@ -27,5 +27,35 @@ void main() {
       expect(authRepository.currentUser, testUser);
       expect(authRepository.authStateChanges(), emits(testUser));
     });
+    test('currentUser is not null after Registration', () async {
+      final authRepository = makeAuthRepository();
+      await authRepository.createUserWithEmailAndPassword(
+        testEmail,
+        testPassword,
+      );
+      expect(authRepository.currentUser, testUser);
+      expect(authRepository.authStateChanges(), emits(testUser));
+    });
+    test('currentUser is null after sign out', () async {
+      final authRepository = makeAuthRepository();
+      await authRepository.signInWithEmailAndPassword(
+        testEmail,
+        testPassword,
+      );
+      expect(authRepository.currentUser, testUser);
+      expect(authRepository.authStateChanges(), emits(testUser));
+
+//We can use this instead as well
+      // expect(
+      //     authRepository.authStateChanges(),
+      //     emitsInOrder([
+      //       testUser, // after sign in
+      //       null, // after sign out
+      //     ]));
+
+      await authRepository.signOut();
+      expect(authRepository.currentUser, null);
+      expect(authRepository.authStateChanges(), emits(null));
+    });
   });
 }
