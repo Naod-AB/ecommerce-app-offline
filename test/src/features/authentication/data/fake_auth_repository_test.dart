@@ -57,5 +57,16 @@ void main() {
       expect(authRepository.currentUser, null);
       expect(authRepository.authStateChanges(), emits(null));
     });
+    test('sign in after dispose throws exception', () {
+      final authRepository = makeAuthRepository();
+      authRepository.dispose();
+      expect(
+        () => authRepository.signInWithEmailAndPassword(
+          testEmail,
+          testPassword,
+        ),
+        throwsStateError,
+      );
+    });
   });
 }
