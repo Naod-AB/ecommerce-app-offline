@@ -1,19 +1,19 @@
 import 'package:ecommerce_app/src/features/authentication/domain/app_user.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import '../../../../../mocks.dart';
+
+import '../../../../mocks.dart';
 import '../../auth_robot.dart';
 
 void main() {
   testWidgets('Cancel logout', (tester) async {
-    final logOut = AuthRobot(tester);
-    await logOut.pumpAccountScreen();
-    await logOut.tapLogoutButton();
-    logOut.expectLogoutDialogFound();
-    await logOut.tapCancelButton();
-    logOut.expectLogoutDialogNotFound();
+    final r = AuthRobot(tester);
+    await r.pumpAccountScreen();
+    await r.tapLogoutButton();
+    r.expectLogoutDialogFound();
+    await r.tapCancelButton();
+    r.expectLogoutDialogNotFound();
   });
-
   testWidgets('Confirm logout, success', (tester) async {
     final r = AuthRobot(tester);
     await r.pumpAccountScreen();
@@ -23,7 +23,6 @@ void main() {
     r.expectLogoutDialogNotFound();
     r.expectErrorAlertNotFound();
   });
-
   testWidgets('Confirm logout, failure', (tester) async {
     final r = AuthRobot(tester);
     final authRepository = MockAuthRepository();
@@ -40,7 +39,6 @@ void main() {
     await r.tapDialogLogoutButton();
     r.expectErrorAlertFound();
   });
-
   testWidgets('Confirm logout, loading state', (tester) async {
     final r = AuthRobot(tester);
     final authRepository = MockAuthRepository();
