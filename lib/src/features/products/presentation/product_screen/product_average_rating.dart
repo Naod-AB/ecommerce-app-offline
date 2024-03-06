@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/src/constants/app_sizes.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
-import 'package:flutter/widgets.dart';
 
 /// Shows the product average rating score and the number of ratings
 class ProductAverageRating extends StatelessWidget {
