@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:ecommerce_app/src/features/cart/application/cart_service.dart';
-import 'package:ecommerce_app/src/features/cart/presentation/add_to_cart/Add_to_cart_controller.dart';
+import 'package:ecommerce_app/src/features/cart/presentation/add_to_cart/adding_to_cart_controller.dart';
+
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
 import 'package:ecommerce_app/src/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
