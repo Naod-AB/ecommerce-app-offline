@@ -12,8 +12,8 @@ void main() {
   FakeAuthRepository makeAuthRepository() => FakeAuthRepository(
         addDelay: false,
       );
-  group('Fake AUth Repository', () {
-    test('current user is null', () {
+  group('FakeAuthRepository', () {
+    test('currentUser is null', () {
       final authRepository = makeAuthRepository();
       addTearDown(authRepository.dispose);
       expect(authRepository.currentUser, null);
@@ -29,7 +29,8 @@ void main() {
       expect(authRepository.currentUser, testUser);
       expect(authRepository.authStateChanges(), emits(testUser));
     });
-    test('currentUser is not null after Registration', () async {
+
+    test('currentUser is not null after registration', () async {
       final authRepository = makeAuthRepository();
       addTearDown(authRepository.dispose);
       await authRepository.createUserWithEmailAndPassword(
@@ -39,6 +40,7 @@ void main() {
       expect(authRepository.currentUser, testUser);
       expect(authRepository.authStateChanges(), emits(testUser));
     });
+
     test('currentUser is null after sign out', () async {
       final authRepository = makeAuthRepository();
       addTearDown(authRepository.dispose);
@@ -49,18 +51,11 @@ void main() {
       expect(authRepository.currentUser, testUser);
       expect(authRepository.authStateChanges(), emits(testUser));
 
-//We can use this instead as well
-      // expect(
-      //     authRepository.authStateChanges(),
-      //     emitsInOrder([
-      //       testUser, // after sign in
-      //       null, // after sign out
-      //     ]));
-
       await authRepository.signOut();
       expect(authRepository.currentUser, null);
       expect(authRepository.authStateChanges(), emits(null));
     });
+
     test('sign in after dispose throws exception', () {
       final authRepository = makeAuthRepository();
       authRepository.dispose();

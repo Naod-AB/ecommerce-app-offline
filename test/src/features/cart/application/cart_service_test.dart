@@ -15,7 +15,6 @@ void main() {
   setUpAll(() {
     registerFallbackValue(const Cart());
   });
-
   const testUser = AppUser(uid: 'abc');
 
   late MockAuthRepository authRepository;
@@ -26,6 +25,7 @@ void main() {
     remoteCartRepository = MockRemoteCartRepository();
     localCartRepository = MockLocalCartRepository();
   });
+
   CartService makeCartService() {
     final container = ProviderContainer(
       overrides: [
@@ -49,12 +49,7 @@ void main() {
       when(() => localCartRepository.setCart(expectedCart)).thenAnswer(
         (_) => Future.value(),
       );
-
-      final cartService = CartService(
-        authRepository: authRepository,
-        localCartRepository: localCartRepository,
-        remoteCartRepository: remoteCartRepository,
-      );
+      final cartService = makeCartService();
       // run
       await cartService.setItem(
         const Item(productId: '123', quantity: 1),
@@ -69,6 +64,7 @@ void main() {
     });
 
     test('non-null user, writes item to remote cart', () async {
+      // setup
       const expectedCart = Cart({'123': 1});
       when(() => authRepository.currentUser).thenReturn(testUser);
       when(() => remoteCartRepository.fetchCart(testUser.uid)).thenAnswer(

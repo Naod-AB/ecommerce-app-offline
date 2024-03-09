@@ -93,7 +93,6 @@ class AuthRobot {
     await tester.pumpAndSettle();
   }
 
-//Logout
   Future<void> pumpAccountScreen({FakeAuthRepository? authRepository}) async {
     await tester.pumpWidget(
       ProviderScope(
@@ -134,7 +133,6 @@ class AuthRobot {
     expect(dialogTitle, findsNothing);
   }
 
-  // for loging out
   Future<void> tapDialogLogoutButton() async {
     final logoutButton = find.byKey(kDialogDefaultKey);
     expect(logoutButton, findsOneWidget);
