@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -15,11 +14,8 @@ class Cart {
   /// - value: quantity
   final Map<ProductID, int> items;
 
-  @override
-  String toString() => 'Cart(items: $items)';
-
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'items': items,
     };
   }
@@ -32,14 +28,16 @@ class Cart {
 
   String toJson() => json.encode(toMap());
 
-  factory Cart.fromJson(String source) =>
-      Cart.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Cart.fromJson(String source) => Cart.fromMap(json.decode(source));
 
   @override
-  bool operator ==(covariant Cart other) {
+  String toString() => 'Cart(items: $items)';
+
+  @override
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return mapEquals(other.items, items);
+    return other is Cart && mapEquals(other.items, items);
   }
 
   @override

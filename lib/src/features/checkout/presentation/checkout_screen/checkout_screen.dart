@@ -9,6 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// The two sub-routes that are presented as part of the checkout flow.
 enum CheckoutSubRoute { register, payment }
 
+/// This is the root widget of the checkout flow, which is composed of 2 pages:
+/// 1. Register page
+/// 2. Payment page
 class CheckoutScreen extends ConsumerStatefulWidget {
   const CheckoutScreen({super.key});
 
