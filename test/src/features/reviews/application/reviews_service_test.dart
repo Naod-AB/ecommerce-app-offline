@@ -19,6 +19,7 @@ void main() {
   late MockAuthRepository authRepository;
   late MockReviewsRepository reviewsRepository;
   late MockProductsRepository productsRepository;
+
   setUp(() {
     authRepository = MockAuthRepository();
     reviewsRepository = MockReviewsRepository();

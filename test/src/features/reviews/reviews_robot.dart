@@ -71,5 +71,6 @@ class ReviewsRobot {
 
   Future<void> updateAndSubmitReview(String comment) async {
     await enterReviewComment(comment);
+    await submitReview();
   }
 }
