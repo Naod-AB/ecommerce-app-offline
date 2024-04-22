@@ -1,10 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integration_test/integration_test.dart';
-
 import '../test/src/robot.dart';
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   testWidgets('Full purchase flow', (tester) async {
     final r = Robot(tester);
     await r.pumpMyApp();
@@ -18,7 +15,6 @@ void main() {
     // checkout
     await r.checkout.startCheckout();
     await r.auth.enterAndSubmitEmailAndPassword();
-    ();
     r.cart.expectFindNCartItems(1);
     await r.checkout.startPayment();
     // when a payment is complete, user is taken to the orders page
@@ -28,6 +24,12 @@ void main() {
     await r.cart.openCart();
     r.cart.expectFindZeroCartItems();
     await r.closePage();
+    // reviews flow
+    await r.products.selectProduct();
+    r.reviews.expectFindLeaveReview();
+    await r.reviews.tapLeaveReviewButton();
+    await r.reviews.createAndSubmitReview('Love it!');
+    r.reviews.expectFindOneReview();
     // sign out
     await r.openPopupMenu();
     await r.auth.openAccountScreen();
