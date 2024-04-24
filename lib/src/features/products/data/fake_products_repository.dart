@@ -4,7 +4,6 @@ import 'package:ecommerce_app/src/constants/test_products.dart';
 import 'package:ecommerce_app/src/features/products/domain/product.dart';
 import 'package:ecommerce_app/src/utils/delay.dart';
 import 'package:ecommerce_app/src/utils/in_memory_store.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FakeProductsRepository {
@@ -23,8 +22,6 @@ class FakeProductsRepository {
   }
 
   Future<List<Product>> fetchProductsList() async {
-    await delay(addDelay);
-    // await Future.delayed(const Duration(milliseconds: 1500));
     return Future.value(_products.value);
   }
 
@@ -58,7 +55,6 @@ class FakeProductsRepository {
       'Client-side search should only be performed if the number of products is small. '
       'Consider doing server-side search for larger datasets.',
     );
-
     // Get all products
     final productsList = await fetchProductsList();
     // Match all products where the title contains the query
@@ -103,7 +99,8 @@ final productProvider =
 final productsListSearchProvider = FutureProvider.autoDispose
     .family<List<Product>, String>((ref, query) async {
   final link = ref.keepAlive();
-  final timer = Timer(const Duration(seconds: 5), () {
+  // * keep previous search results in memory for 60 seconds
+  final timer = Timer(const Duration(seconds: 60), () {
     link.close();
   });
   ref.onDispose(() => timer.cancel());
